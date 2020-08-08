@@ -40,18 +40,20 @@
           <div class="col-sm-12">
             <label for="">Departamento*</label>
             <div id="select_depto">
-              <select name="" id="" class="outlinenone">
+              <select name="ciudad" id="ciudad" class="outlinenone">
                 <option value="" disbled>Selecciona</option>
               </select>
             </div>
+            <span id="err_depto"></span>
           </div>
           <div class="col-sm-12">
             <label for="">Ciudad*</label>
             <div id="select_ciudad">
-              <select name="" id="" class="outlinenone">
+              <select name="ciudad" id="ciudad" class="outlinenone">
                 <option value="" disbled>Selecciona</option>
               </select>
             </div>
+            <span id="err_ciudad"></span>
           </div>
           <div class="col-sm-12">
             <label for="">Nombre*</label>
@@ -83,7 +85,7 @@
       success: function(res) {
         data = JSON.parse(res)
         console.log(data)
-        var select = '<select name="depto" id="depto" class="outlinenone" onchange="setCity()">'
+        var select = '<select name="depto" id="depto" class="outlinenone" onchange="setCity()"><option value="">Selecciona</option>'
         for (var depto in data) {
           select = select + '<option value="' + depto + '">' + depto + '</option>'
         }
@@ -94,6 +96,9 @@
   }
 
   var setCity = function() {
+    $('#depto').css('border', '#E1E1E1 solid 1px')
+    $('#err_depto').html('')
+
     var depto = $('#depto').val();
     var cities = data[depto]
 
@@ -107,22 +112,43 @@
   }
 
 
-
   var save = function() {
     var name = $('#name').val();
     var email = $('#email').val();
     var city = $('#ciudad').val();
     var department = $('#depto').val();
 
-    $.ajax({
-      type: "POST",
-      url: 'control/insert.php',
-      data: {"name": name, "email": email, "city": city, "department": department},
-      success: function(res) {
-        swal("Tu información ha sido recibida satisfactoriamente", "", "success");
-      }
-    });
-
+    if (department.length == 0) {
+      $('#depto').css('border', 'red solid 1px')
+      $('#err_depto').css('color', 'red')
+      $('#err_depto').html('Ingresa un nombre correcto')
+    } else if (city.length == 0) {
+      $('#city').css('border', 'red solid 1px')
+      $('#err_city').css('color', 'red')
+      $('#err_city').html('Ingresa un correo electrónico correcto')
+    } else if (name.length == 0) {
+      $('#name').css('border', 'red solid 1px')
+      $('#err_name').css('color', 'red')
+      $('#err_name').html('Ingresa una ciudad correcta')
+    } else if (email.length == 0) {
+      $('#email').css('border', 'red solid 1px')
+      $('#err_email').css('color', 'red')
+      $('#err_email').html('Ingresa un departamento correct')
+    } else {
+      $.ajax({
+        type: "POST",
+        url: 'control/insert.php',
+        data: {
+          "name": name,
+          "email": email,
+          "city": city,
+          "department": department
+        },
+        success: function(res) {
+          swal("Tu información ha sido recibida satisfactoriamente", "", "success");
+        }
+      });
+    }
   }
 
   function caracteresCorreoValido() {
