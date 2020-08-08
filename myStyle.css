@@ -68,7 +68,9 @@ h3 {
     -webkit-box-shadow: 8px 8px 18px 9px rgba(239, 239, 239, 1);
     -moz-box-shadow: 8px 8px 18px 9px rgba(239, 239, 239, 1);
     box-shadow: 8px 8px 18px 9px rgba(239, 239, 239, 1);
+    margin-bottom: 5%;
 }
+
 
 label {
     margin-top: 2%;
@@ -76,23 +78,23 @@ label {
     font-family: Roboto;
 }
 
-::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+::-webkit-input-placeholder { 
     color: #E1E1E1;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+:-moz-placeholder { 
    color: #E1E1E1;
-   opacity: 1 /* esto es porque Firefox le reduce la opacidad por defecto */;
+   opacity: 1;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+::-moz-placeholder { 
    color: #E1E1E1;
    opacity:  1;
 }
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
+:-ms-input-placeholder { 
    color: #E1E1E1;
 }
 
 select {
-    background-image: url(assets/img/next.png); /*aquí deberás escribir la ruta de la imagen que utilizarás como flecha del desplegable*/
+    background-image: url(assets/img/next.png); 
     background-repeat: no-repeat;
     background-position: right center;
     -webkit-appearance: none;
@@ -103,5 +105,23 @@ select {
     }
 
     select::-ms-expand {
-    display: none; /*Evita que se muestre la flecha por defecto en versiones de IE*/
+    display: none; 
     }
+
+    @media only screen
+  and (min-device-width : 320px)
+  and (max-device-width : 667px) {
+    .form {
+        margin: 0;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    .mensaje {
+        padding: 5%;
+    }
+
+    .title{
+        padding: 5%;
+    }
+}
