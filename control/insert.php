@@ -1,7 +1,7 @@
 <?php
 include('conx_bd.php');
 
-$sql = "INSERT INTO contacts_test (name, email, state, city) VALUES 
+$sql = "INSERT INTO contacts (name, email, state, city) VALUES 
 ('".$_POST['name']."','".$_POST['email']."','".$_POST['department']."','". utf8_decode($_POST['city'])."')";
 
 if ($mysqli->query($sql) === TRUE) {
